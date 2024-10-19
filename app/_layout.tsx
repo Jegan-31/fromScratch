@@ -26,14 +26,22 @@ const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = (props) => {
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} style={styles.drawerContent}>
       <DrawerItemList {...props} />
-      {/* Add Divider */}
+      <DrawerItem
+        label="Logout"
+        labelStyle={styles.labelstyle}
+        onPress={() => props.navigation.navigate('Login')} 
+        icon={({ focused }) => (
+          <Ionicons name="log-out-outline" size={22} color={focused ? '#000' : '#172743'} />
+        )}
+      />
       <View style={styles.divider} />
       {/* Add more drawer items after the divider if needed */}
       <DrawerItem
         
         label="About Us"
+        labelStyle={styles.labelstyle}
         onPress={() => props.navigation.navigate('CreateAccount')} 
         icon={({ focused }) => (
           <MaterialIcons name="keyboard-arrow-right" size={22} color={focused ? '#000' : '#172743'} />
@@ -41,6 +49,7 @@ const CustomDrawerContent = (props) => {
       />
       <DrawerItem
         label="Privacy Policy"
+        labelStyle={styles.labelstyle}
         onPress={() => props.navigation.navigate('')}
         icon={({ focused }) => (
           <MaterialIcons name="keyboard-arrow-right" size={22} color={focused ? '#000' : '#172743'} />
@@ -48,6 +57,7 @@ const CustomDrawerContent = (props) => {
       />
       <DrawerItem
         label="Troubleshoot"
+        labelStyle={styles.labelstyle}
         onPress={() => props.navigation.navigate('')}
         icon={({ focused }) => (
           <MaterialIcons name="keyboard-arrow-right" size={22} color={focused ? '#000' : '#172743'} />
@@ -147,13 +157,14 @@ const DrawerNavigation = () => {
         ),
       }}
       />
-      <Drawer.Screen name="Logout" component={Login}
+      {/* <Drawer.Screen name="Logout" component={Login}
       options={{
         drawerIcon: ({ focused }) => (
           <Ionicons name="log-out-outline" size={22} color={focused ? '#000' : '#172743'} />
         ),
+        headerShown:false
       }}
-       />
+       /> */}
       {/* Add other screens to the drawer */}
     </Drawer.Navigator>
   );
@@ -173,9 +184,12 @@ const RootLayout = () => {
 };
 
 const styles = StyleSheet.create({
+  drawerContent: {
+    backgroundColor: '#fcfcfc', // Drawer background color
+  },
   divider: {
     height: 1,
-    backgroundColor: '#ccc', // Divider color
+    backgroundColor: '#FFD751', // Divider color
     marginVertical: 10,
   },
   contactContainer: {
@@ -191,7 +205,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 5,
     fontSize: 14,
-    color: '#555',
+    color: '#172743',
+  },
+  labelstyle:{
+    color: '#172743',
   },
   notificationContainer: {
     position: 'relative',
